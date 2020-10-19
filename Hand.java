@@ -7,8 +7,10 @@
  */
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Comparator;
 
 public class Hand<C extends Card> {
@@ -59,12 +61,16 @@ public class Hand<C extends Card> {
             return new ArrayList<C>(0);
         }
 
-        ArrayList<C> duplicates = new ArrayList<C>(this.cards.size());
-        for (int i = 0; i < this.cards.size() - 1; i++) {
-            C card1 = this.cards.get(i);
-            C card2 = this.cards.get(i + 1);
-            boolean equal = comparator.compare(card1, card2) == 0;
-            if (equal) duplicates.add(card1);                           
+        // Sort the collection first using the comparator
+        ArrayList<C> cardCopy = new ArrayList<>(this.cards);
+        Collections.sort(cardCopy, comparator);        
+
+        ArrayList<C> duplicates = new ArrayList<C>(cardCopy.size());
+        for (int i = 0; i < cardCopy.size() - 1; i++) {
+            C card1 = cardCopy.get(i);
+            C card2 = cardCopy.get(i + 1);
+            boolean equal = comparator.compare(card1, card2) == 0;            
+            if (equal) duplicates.add(card1);                                     
         }
 
         return duplicates;

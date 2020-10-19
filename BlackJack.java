@@ -205,6 +205,7 @@ public class BlackJack extends CardGame<StandardCard> implements isTurnable<Blac
             if (res == null) {
                 System.out.println("Invalid Move!");
             } else if (res == BlackJackMove.SPLIT && (noDuplicateCards || notEnoughMoney)) {
+                System.out.println("Duplicates: " +  hand.getDuplicates(standardCardComparators.getCardFaceComparator()));                
                 System.out.println("Unable to split your hand! You must have duplicate cards, and enough money to bet $" + player.getBets().get(hand));
             } else if (res == BlackJackMove.DOUBLE_UP && notEnoughMoney) {
                 System.out.println("Unable to double up! You must have enough money to bet $" + player.getBets().get(hand) + " more money!");
@@ -279,8 +280,14 @@ public class BlackJack extends CardGame<StandardCard> implements isTurnable<Blac
         int cardsToDeal = 2;
         for (BlackJackPlayer p : this.getPlayers()) {
             for (int dealtCards = 0; dealtCards < cardsToDeal; dealtCards++) {
-                p.getHands().get(0).getCards().add((StandardCard) this.getDeck().drawCard(true));                        
+                // p.getHands().get(0).getCards().add((StandardCard) this.getDeck().drawCard(true));                        
             }       
+            // StandardCard card1 = new StandardCard(Suit.CLUBS,"2","2");
+            // card1.setFaceUp();
+            // StandardCard card2 = new StandardCard(Suit.DIAMONDS,"2","2");
+            // card2.setFaceUp();
+            // p.getHands().get(0).getCards().add(card1);
+            // p.getHands().get(0).getCards().add(card2);
             System.out.println("Player " + p + "\'s Hand: " + p.getHands().get(0));
         }        
 

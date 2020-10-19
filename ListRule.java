@@ -77,9 +77,9 @@ public class ListRule<T extends Modifiable> extends Rule<ArrayList<T>> {
 
             if (choice.equals("Quit")) {
                 editing = false;
-            } else {
+            } else {                
                 T newElem = null;
-                try {
+                try {                                        
                     newElem = (T) this.templateModifiableObject.getClass().getConstructor().newInstance();
                 } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                         | InvocationTargetException | NoSuchMethodException | SecurityException | ClassCastException e) {
